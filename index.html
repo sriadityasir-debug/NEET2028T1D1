@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEET UG 2028 – NTA CBT Mock Test | Dr. Aditya Srivastava</title>
+  <style>
+    :root {
+      --nta-blue: #1a3c6e;
+      --nta-light-blue: #2b5ea7;
+      --nta-accent: #e8f0fe;
+      --nta-border: #c4d4e8;
+      --nta-green: #0d8043;
+      --nta-red: #c0392b;
+      --nta-orange: #e67e22;
+      --nta-white: #ffffff;
+      --nta-gray: #f5f6f8;
+      --nta-dark-gray: #444;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+      --radius: 10px;
+      --transition: 0.2s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+      background: #eef2f7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .login-container {
+      background: var(--nta-white);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      padding: 40px 36px;
+      width: 420px;
+      max-width: 95vw;
+      text-align: center;
+      border: 1px solid var(--nta-border);
+    }
+    .login-container .nta-logo {
+      width: 80px;
+      height: 80px;
+      background: var(--nta-blue);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .login-container h2 {
+      color: var(--nta-blue);
+      font-size: 22px;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .login-container .subtitle {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    .login-container .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .login-container label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--nta-border);
+      border-radius: 8px;
+      font-size: 15px;
+      transition: var(--transition);
+      background: var(--nta-gray);
+      font-family: inherit;
+      letter-spacing: 0.3px;
+    }
+    .login-container input:focus {
+      outline: none;
+      border-color: var(--nta-blue);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(26, 60, 110, 0.08);
+    }
+    .login-container .btn-login {
+      width: 100%;
+      padding: 13px;
+      background: var(--nta-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+      margin-top: 6px;
+    }
+    .login-container .btn-login:hover {
+      background: #152f58;
+      box-shadow: 0 4px 16px rgba(26, 60, 110, 0.3);
+    }
+    .login-container .hint {
+      font-size: 11px;
+      color: #888;
+      margin-top: 14px;
+      letter-spacing: 0.3px;
+    }
+    .login-error {
+      color: var(--nta-red);
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+      font-weight: 600;
+    }
+    .login-error.show {
+      display: block;
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-6px);
+      }
+      50% {
+        transform: translateX(6px);
+      }
+      75% {
+        transform: translateX(-4px);
+      }
+    }
+
+    .test-wrapper {
+      display: none;
+      width: 100%;
+      max-width: 1300px;
+      margin: 10px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      min-height: 92vh;
+      flex-direction: column;
+    }
+    .test-wrapper.active {
+      display: flex;
+    }
+
+    .top-bar {
+      background: var(--nta-blue);
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+    .top-bar .candidate-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .top-bar .timer-box {
+      background: #000;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: #ffeb3b;
+      min-width: 100px;
+      text-align: center;
+    }
+    .top-bar .timer-box.warning {
+      color: #ff5722;
+      animation: pulse 0.8s infinite;
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+    .top-bar .section-indicator {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .main-area {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .question-panel {
+      flex: 1;
+      padding: 24px 28px;
+      overflow-y: auto;
+      border-right: 1px solid var(--nta-border);
+      background: #fdfdfd;
+    }
+    .question-panel .q-number {
+      font-weight: 700;
+      color: var(--nta-blue);
+      font-size: 14px;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    .question-panel .q-text {
+      font-size: 16px;
+      color: #222;
+      margin-bottom: 18px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .question-panel .options-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .question-panel .option-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 15px;
+      background: #fff;
+      user-select: none;
+    }
+    .question-panel .option-item:hover {
+      border-color: var(--nta-light-blue);
+      background: var(--nta-accent);
+    }
+    .question-panel .option-item.selected {
+      border-color: var(--nta-blue);
+      background: #e3ecf9;
+      font-weight: 600;
+    }
+    .option-radio {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #bbb;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .option-item.selected .option-radio {
+      border-color: var(--nta-blue);
+      background: var(--nta-blue);
+    }
+    .option-item.selected .option-radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-buttons button {
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .btn-save-next {
+      background: var(--nta-blue);
+      color: #fff;
+    }
+    .btn-save-next:hover {
+      background: #152f58;
+    }
+    .btn-clear {
+      background: #fff;
+      color: var(--nta-red);
+      border: 2px solid var(--nta-red) !important;
+    }
+    .btn-clear:hover {
+      background: #fdecea;
+    }
+    .btn-mark {
+      background: #fff;
+      color: var(--nta-orange);
+      border: 2px solid var(--nta-orange) !important;
+    }
+    .btn-mark:hover {
+      background: #fef5ec;
+    }
+    .btn-mark.marked {
+      background: var(--nta-orange);
+      color: #fff;
+    }
+    .btn-submit {
+      background: var(--nta-green);
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 24px;
+    }
+    .btn-submit:hover {
+      background: #0b6b34;
+    }
+
+    .palette {
+      width: 320px;
+      padding: 16px;
+      overflow-y: auto;
+      background: #fafbfc;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .palette h4 {
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .palette .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 10px;
+      justify-content: center;
+      letter-spacing: 0.3px;
+    }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .legend .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .dot.answered {
+      background: #0d8043;
+    }
+    .dot.not-answered {
+      background: #c0392b;
+    }
+    .dot.marked-review {
+      background: #9b59b6;
+    }
+    .dot.not-visited {
+      background: #ddd;
+    }
+    .palette-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+    }
+    .palette-btn {
+      width: 36px;
+      height: 34px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      transition: var(--transition);
+      background: #fff;
+      font-family: inherit;
+      letter-spacing: 0.2px;
+    }
+    .palette-btn:hover {
+      border-color: var(--nta-blue);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .palette-btn.answered {
+      background: #0d8043;
+      color: #fff;
+      border-color: #0d8043;
+    }
+    .palette-btn.not-answered {
+      background: #c0392b;
+      color: #fff;
+      border-color: #c0392b;
+    }
+    .palette-btn.marked-review {
+      background: #9b59b6;
+      color: #fff;
+      border-color: #9b59b6;
+    }
+    .palette-btn.current {
+      border: 3px solid #000 !important;
+      font-weight: 900;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+    .palette .section-tabs {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .palette .section-tab {
+      padding: 7px 12px;
+      border-radius: 16px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      background: #fff;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .palette .section-tab.active {
+      background: var(--nta-blue);
+      color: #fff;
+      border-color: var(--nta-blue);
+    }
+    .palette .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 0.3px;
+    }
+    .palette .summary-row strong {
+      color: #222;
+    }
+
+    .results-container {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      padding: 36px 30px;
+      flex-direction: column;
+      gap: 22px;
+      text-align: center;
+    }
+    .results-container.active {
+      display: flex;
+    }
+    .results-container h1 {
+      color: var(--nta-blue);
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+    .results-container .score-card {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .score-item {
+      background: var(--nta-accent);
+      border-radius: 12px;
+      padding: 20px 24px;
+      min-width: 140px;
+      border: 2px solid var(--nta-border);
+    }
+    .score-item .val {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--nta-blue);
+    }
+    .score-item .lbl {
+      font-size: 12px;
+      color: #666;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .college-result {
+      background: #fffef5;
+      border: 2px solid #f0d060;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+      line-height: 1.7;
+    }
+    .college-result h3 {
+      color: #5d4037;
+      margin-bottom: 8px;
+      letter-spacing: 0.4px;
+    }
+    .college-result .air {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--nta-purple);
+    }
+    .motivation-box {
+      background: #fff8f0;
+      border: 2px solid #f0a060;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: left;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .motivation-box h3 {
+      color: #c0392b;
+      letter-spacing: 0.4px;
+    }
+    .topic-repeat {
+      background: #f0f8ff;
+      border: 2px solid #a0c8f0;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: left;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .topic-repeat h3 {
+      color: #1a3c6e;
+      letter-spacing: 0.4px;
+    }
+    .btn-restart {
+      padding: 12px 28px;
+      background: var(--nta-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-size: 15px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .btn-restart:hover {
+      background: #152f58;
+    }
+    .section-score {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+    .section-score span {
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-weight: 600;
+    }
+    .sec-phy {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+    .sec-chem {
+      background: #fce4ec;
+      color: #c62828;
+    }
+    .sec-bio {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    @media (max-width: 900px) {
+      .main-area {
+        flex-direction: column;
+      }
+      .palette {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-height: 200px;
+        overflow-y: auto;
+        border-top: 1px solid var(--nta-border);
+      }
+      .palette-grid {
+        gap: 4px;
+      }
+      .palette-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 9px;
+      }
+      .question-panel {
+        padding: 14px;
+      }
+      .top-bar {
+        font-size: 10px;
+        padding: 8px 10px;
+      }
+      .top-bar .timer-box {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+      .score-card {
+        gap: 8px;
+      }
+      .score-item {
+        min-width: 100px;
+        padding: 12px;
+      }
+      .score-item .val {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN PAGE -->
+  <div class="login-container" id="loginPage">
+    <div class="nta-logo">NTA</div>
+    <h2>NEET (UG) 2028</h2>
+    <p class="subtitle">National Testing Agency · Computer Based Test</p>
+    <div class="input-group">
+      <label>Candidate ID / Username</label>
+      <input type="text" id="loginId" placeholder="Enter your ID" value="Dr.Aditya Srivastava" autocomplete="off">
+    </div>
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter password" value="2028" autocomplete="off">
+    </div>
+    <button class="btn-login" onclick="handleLogin()">🔒 Sign In & Start Test</button>
+    <p class="login-error" id="loginError">❌ Invalid credentials! Please check your ID and Password.</p>
+    <p class="hint">💡 Pre-filled credentials: ID: <strong>Dr.Aditya Srivastava</strong> | Pass: <strong>2028</strong></p>
+  </div>
+
+  <!-- TEST INTERFACE -->
+  <div class="test-wrapper" id="testWrapper">
+    <div class="top-bar">
+      <span class="candidate-name">👨‍⚕️ Dr. Aditya Srivastava</span>
+      <span class="section-indicator" id="sectionLabel">📘 PHYSICS (Q1-Q45)</span>
+      <span class="timer-box" id="timerBox">03:00:00</span>
+      <button class="btn-submit" onclick="submitTest()" style="padding:7px 16px;font-size:12px;">📝 Submit Test</button>
+    </div>
+    <div class="main-area">
+      <div class="question-panel" id="questionPanel">
+        <div class="q-number" id="qNumberDisplay">Question 1 of 180</div>
+        <div class="q-text" id="qTextDisplay"></div>
+        <ul class="options-list" id="optionsList"></ul>
+        <div class="nav-buttons">
+          <button class="btn-save-next" onclick="saveAndNext()">💾 Save & Next →</button>
+          <button class="btn-clear" onclick="clearResponse()">🧹 Clear</button>
+          <button class="btn-mark" id="btnMark" onclick="toggleMark()">📌 Mark for Review</button>
+          <button class="btn-submit" onclick="submitTest()" style="margin-left:auto;">✅ Submit</button>
+        </div>
+      </div>
+      <div class="palette" id="palettePanel">
+        <h4>📋 Question Palette</h4>
+        <div class="legend">
+          <span><span class="dot answered"></span> Answered</span>
+          <span><span class="dot not-answered"></span> Not Answered</span>
+          <span><span class="dot marked-review"></span> Marked</span>
+          <span><span class="dot not-visited"></span> Not Visited</span>
+        </div>
+        <div class="section-tabs" id="sectionTabs">
+          <button class="section-tab active" onclick="switchSection('physics')">📘 Physics (1-45)</button>
+          <button class="section-tab" onclick="switchSection('chemistry')">🧪 Chemistry (46-90)</button>
+          <button class="section-tab" onclick="switchSection('biology')">🧬 Biology (91-180)</button>
+        </div>
+        <div class="palette-grid" id="paletteGrid"></div>
+        <div class="summary-row">
+          <span>✅ Answered: <strong id="cntAnswered">0</strong></span>
+          <span>❌ Not Answered: <strong id="cntNotAnswered">180</strong></span>
+          <span>📌 Marked: <strong id="cntMarked">0</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS PAGE -->
+  <div class="results-container" id="resultsPage">
+    <h1>📊 NEET UG 2028 – Result</h1>
+    <p style="color:#666;">Candidate: <strong>Dr. Aditya Srivastava</strong></p>
+    <div class="score-card">
+      <div class="score-item"><div class="val" id="resPercent">0%</div><div class="lbl">Percentage</div></div>
+      <div class="score-item"><div class="val" id="resObtained">0</div><div class="lbl">Obtained Marks</div></div>
+      <div class="score-item"><div class="val" style="color:#0d8043;">720</div><div class="lbl">Total Marks</div></div>
+      <div class="score-item"><div class="val" id="resAIR" style="color:#6c3483;">---</div><div class="lbl">Predicted AIR</div></div>
+    </div>
+    <div class="section-score" id="sectionScores"></div>
+    <div class="college-result" id="collegeResultBox"></div>
+    <div class="motivation-box" id="motivationBox"></div>
+    <div class="topic-repeat" id="topicRepeatBox"></div>
+    <button class="btn-restart" onclick="restartTest()">🔄 Take Test Again</button>
+    <p style="font-size:11px;color:#999;">* This is a simulated practice test. Actual NEET UG results may vary.</p>
+  </div>
+
+  <script>
+    // ==================== QUESTION BANK (180 PYQ-based Questions) ====================
+    const questionBank = [];
+
+    // PHYSICS (Q1-Q45)
+    const physicsQuestions = [
+      { id:1, q:'The SI unit of luminous intensity is:', opts:['Candela','Lumen','Lux','Watt'], ans:0, topic:'Units and Measurements' },
+      { id:2, q:'Which of the following is a derived unit?', opts:['Kilogram','Second','Newton','Mole'], ans:2, topic:'Units and Measurements' },
+      { id:3, q:'The dimensional formula of Planck\'s constant is:', opts:['[ML²T⁻¹]','[ML²T⁻²]','[MLT⁻¹]','[M⁰L²T⁻¹]'], ans:0, topic:'Units and Measurements' },
+      { id:4, q:'One astronomical unit (AU) is approximately:', opts:['1.5×10⁸ km','1.5×10⁹ km','3×10⁸ m/s','9.46×10¹² km'], ans:0, topic:'Units and Measurements' },
+      { id:5, q:'The number of significant figures in 0.00340 is:', opts:['2','3','4','5'], ans:1, topic:'Units and Measurements' },
+      { id:6, q:'Which instrument is used to measure very small lengths with high precision?', opts:['Vernier calipers','Screw gauge','Metre scale','Spherometer'], ans:1, topic:'Units and Measurements' },
+      { id:7, q:'The dimensional formula of torque is same as that of:', opts:['Work','Energy','Force','Angular momentum'], ans:1, topic:'Units and Measurements' },
+      { id:8, q:'If y = 3x² + 5x + 2, then dy/dx at x = 1 is:', opts:['6','8','11','10'], ans:2, topic:'Mathematical Tools' },
+      { id:9, q:'The integral ∫(2x+3)dx from x=0 to x=2 equals:', opts:['4','7','10','12'], ans:2, topic:'Mathematical Tools' },
+      { id:10, q:'The value of sin(30°) × cos(60°) is:', opts:['0.25','0.5','0.75','1'], ans:0, topic:'Mathematical Tools' },
+      { id:11, q:'A vector of magnitude 10 units makes an angle 60° with x-axis. Its x-component is:', opts:['5 units','8.66 units','10 units','6 units'], ans:0, topic:'Mathematical Tools' },
+      { id:12, q:'The dot product of two perpendicular vectors is:', opts:['0','1','Product of magnitudes','Sum of magnitudes'], ans:0, topic:'Mathematical Tools' },
+      { id:13, q:'If the percentage error in measurement of radius is 2%, the percentage error in volume of sphere is:', opts:['2%','4%','6%','8%'], ans:2, topic:'Units and Measurements' },
+      { id:14, q:'Which of the following pairs have same dimensions?', opts:['Work and Torque','Force and Power','Velocity and Acceleration','Momentum and Impulse'], ans:3, topic:'Units and Measurements' },
+      { id:15, q:'The least count of a vernier calipers having 20 VSD = 19 MSD (1 MSD = 1 mm) is:', opts:['0.01 mm','0.02 mm','0.05 mm','0.1 mm'], ans:2, topic:'Units and Measurements' },
+      { id:16, q:'Light year is a unit of:', opts:['Time','Distance','Speed','Intensity'], ans:1, topic:'Units and Measurements' },
+      { id:17, q:'The slope of velocity-time graph gives:', opts:['Displacement','Acceleration','Speed','Distance'], ans:1, topic:'Mathematical Tools' },
+      { id:18, q:'If A = 3i + 4j, the magnitude of A is:', opts:['3','4','5','7'], ans:2, topic:'Mathematical Tools' },
+      { id:19, q:'The derivative of sin(x) with respect to x is:', opts:['-sin(x)','cos(x)','-cos(x)','tan(x)'], ans:1, topic:'Mathematical Tools' },
+      { id:20, q:'One parsec is approximately equal to:', opts:['3.26 light years','1.5×10⁸ km','9.46×10¹² km','3×10⁸ m'], ans:0, topic:'Units and Measurements' },
+      { id:21, q:'The dimensional formula of surface tension is:', opts:['[MT⁻²]','[MLT⁻²]','[ML⁰T⁻²]','[M⁰LT⁻²]'], ans:0, topic:'Units and Measurements' },
+      { id:22, q:'Area under acceleration-time graph gives:', opts:['Velocity','Displacement','Change in velocity','Jerk'], ans:2, topic:'Mathematical Tools' },
+      { id:23, q:'The value of log₁₀(1000) is:', opts:['1','2','3','10'], ans:2, topic:'Mathematical Tools' },
+      { id:24, q:'Which is NOT a fundamental unit?', opts:['Metre','Kilogram','Volt','Second'], ans:2, topic:'Units and Measurements' },
+      { id:25, q:'The cross product i × j equals:', opts:['0','k','-k','1'], ans:1, topic:'Mathematical Tools' },
+      { id:26, q:'If f(x) = eˣ, then f\'(x) is:', opts:['eˣ','xeˣ','1','0'], ans:0, topic:'Mathematical Tools' },
+      { id:27, q:'The dimensional formula of pressure is:', opts:['[ML⁻¹T⁻²]','[MLT⁻²]','[ML²T⁻²]','[M⁰LT⁻²]'], ans:0, topic:'Units and Measurements' },
+      { id:28, q:'A scalar quantity among the following is:', opts:['Force','Velocity','Work','Displacement'], ans:2, topic:'Mathematical Tools' },
+      { id:29, q:'The number 0.000456 in scientific notation is:', opts:['4.56×10⁻⁴','4.56×10⁻³','45.6×10⁻⁵','0.456×10⁻³'], ans:0, topic:'Units and Measurements' },
+      { id:30, q:'The integral of cos(x) dx is:', opts:['-sin(x)+C','sin(x)+C','-cos(x)+C','tan(x)+C'], ans:1, topic:'Mathematical Tools' },
+      { id:31, q:'Parsec is the unit of:', opts:['Time','Distance','Angle','Speed'], ans:1, topic:'Units and Measurements' },
+      { id:32, q:'The angle between two vectors A and B is θ. Their dot product is:', opts:['AB sinθ','AB cosθ','AB tanθ','AB'], ans:1, topic:'Mathematical Tools' },
+      { id:33, q:'Which has the dimension [ML²T⁻²]?', opts:['Force','Work','Power','Pressure'], ans:1, topic:'Units and Measurements' },
+      { id:34, q:'The derivative of x³ with respect to x is:', opts:['3x','x²','3x²','3x³'], ans:2, topic:'Mathematical Tools' },
+      { id:35, q:'Electron volt is a unit of:', opts:['Charge','Potential','Energy','Current'], ans:2, topic:'Units and Measurements' },
+      { id:36, q:'The value of tan(45°) is:', opts:['0','0.5','1','√2'], ans:2, topic:'Mathematical Tools' },
+      { id:37, q:'Screw gauge works on the principle of:', opts:['Vernier','Micrometer screw','Lever','Pendulum'], ans:1, topic:'Units and Measurements' },
+      { id:38, q:'The magnitude of vector 3i - 4j is:', opts:['1','5','7','12'], ans:1, topic:'Mathematical Tools' },
+      { id:39, q:'Dimensional analysis can be used to:', opts:['Check equation correctness','Find exact value','Measure quantities','Define units only'], ans:0, topic:'Units and Measurements' },
+      { id:40, q:'∫ x dx from 1 to 3 equals:', opts:['2','4','6','8'], ans:1, topic:'Mathematical Tools' },
+      { id:41, q:'The SI unit of electric current is:', opts:['Volt','Ampere','Ohm','Watt'], ans:1, topic:'Units and Measurements' },
+      { id:42, q:'A particle moves along x-axis. If v = dx/dt, then acceleration is:', opts:['dx/dt','dv/dt','d²x/dt²','Both B and C'], ans:3, topic:'Mathematical Tools' },
+      { id:43, q:'Which of the following is dimensionless?', opts:['Strain','Stress','Force','Pressure'], ans:0, topic:'Units and Measurements' },
+      { id:44, q:'The maximum value of sinθ is:', opts:['0','0.5','1','2'], ans:2, topic:'Mathematical Tools' },
+      { id:45, q:'The dimensional formula [M⁰L⁰T⁻¹] corresponds to:', opts:['Frequency','Velocity','Acceleration','Time period'], ans:0, topic:'Units and Measurements' },
+    ];
+
+    // CHEMISTRY (Q46-Q90)
+    const chemistryQuestions = [
+      { id:46, q:'The number of moles in 36 g of water (H₂O) is:', opts:['1','2','3','4'], ans:1, topic:'Some Basic Concepts of Chemistry' },
+      { id:47, q:'Which of the following is an extensive property?', opts:['Density','Temperature','Mass','Pressure'], ans:2, topic:'Some Basic Concepts of Chemistry' },
+      { id:48, q:'The empirical formula of glucose (C₆H₁₂O₆) is:', opts:['C₆H₁₂O₆','C₃H₆O₃','CH₂O','C₂H₄O₂'], ans:2, topic:'Some Basic Concepts of Chemistry' },
+      { id:49, q:'Avogadro\'s number is approximately:', opts:['6.022×10²²','6.022×10²³','3.011×10²³','1.66×10⁻²⁴'], ans:1, topic:'Some Basic Concepts of Chemistry' },
+      { id:50, q:'The pH of a neutral solution at 25°C is:', opts:['0','1','7','14'], ans:2, topic:'Acids and Bases' },
+      { id:51, q:'Which gas is known as laughing gas?', opts:['NO','N₂O','NO₂','N₂O₄'], ans:1, topic:'p-Block Elements' },
+      { id:52, q:'The bond angle in water molecule is approximately:', opts:['109.5°','104.5°','120°','180°'], ans:1, topic:'Chemical Bonding' },
+      { id:53, q:'Which element has the highest electronegativity?', opts:['Oxygen','Fluorine','Chlorine','Nitrogen'], ans:1, topic:'Periodic Table' },
+      { id:54, q:'The oxidation state of Mn in KMnO₄ is:', opts:['+3','+5','+7','+6'], ans:2, topic:'Redox Reactions' },
+      { id:55, q:'Which of the following is a noble gas?', opts:['Nitrogen','Oxygen','Argon','Hydrogen'], ans:2, topic:'Periodic Table' },
+      { id:56, q:'The IUPAC name of CH₃COOH is:', opts:['Methanoic acid','Ethanoic acid','Propanoic acid','Butanoic acid'], ans:1, topic:'Organic Chemistry' },
+      { id:57, q:'Isotopes of an element have same number of:', opts:['Neutrons','Protons','Nucleons','Electrons only'], ans:1, topic:'Atomic Structure' },
+      { id:58, q:'The shape of methane (CH₄) molecule is:', opts:['Square planar','Tetrahedral','Trigonal planar','Linear'], ans:1, topic:'Chemical Bonding' },
+      { id:59, q:'Which acid is present in vinegar?', opts:['Citric acid','Acetic acid','Lactic acid','Formic acid'], ans:1, topic:'Organic Chemistry' },
+      { id:60, q:'The cathode in a galvanic cell is:', opts:['Positive electrode','Negative electrode','Neutral','Ground'], ans:0, topic:'Electrochemistry' },
+      { id:61, q:'Diamond is an allotrope of:', opts:['Silicon','Carbon','Boron','Nitrogen'], ans:1, topic:'p-Block Elements' },
+      { id:62, q:'The molar mass of CO₂ is:', opts:['28 g/mol','32 g/mol','44 g/mol','56 g/mol'], ans:2, topic:'Some Basic Concepts of Chemistry' },
+      { id:63, q:'Which of the following is a strong acid?', opts:['CH₃COOH','H₂CO₃','HCl','H₃PO₄'], ans:2, topic:'Acids and Bases' },
+      { id:64, q:'The principal quantum number n can have values:', opts:['0,1,2...','1,2,3...','-1,0,1...','0.5,1.5...'], ans:1, topic:'Atomic Structure' },
+      { id:65, q:'Baking soda is chemically:', opts:['Na₂CO₃','NaHCO₃','CaCO₃','K₂CO₃'], ans:1, topic:'s-Block Elements' },
+      { id:66, q:'The hybridisation of carbon in ethene (C₂H₄) is:', opts:['sp','sp²','sp³','sp³d'], ans:1, topic:'Chemical Bonding' },
+      { id:67, q:'Which metal is liquid at room temperature?', opts:['Sodium','Mercury','Iron','Zinc'], ans:1, topic:'Periodic Table' },
+      { id:68, q:'The formula of quicklime is:', opts:['Ca(OH)₂','CaO','CaCO₃','CaCl₂'], ans:1, topic:'s-Block Elements' },
+      { id:69, q:'A reducing agent is one which:', opts:['Gains electrons','Loses electrons','Does not change','Gains protons'], ans:1, topic:'Redox Reactions' },
+      { id:70, q:'The pH scale ranges from:', opts:['0 to 7','0 to 14','1 to 10','0 to 10'], ans:1, topic:'Acids and Bases' },
+      { id:71, q:'Which orbital has dumb-bell shape?', opts:['s','p','d','f'], ans:1, topic:'Atomic Structure' },
+      { id:72, q:'Washing soda is:', opts:['Na₂CO₃·10H₂O','NaHCO₃','NaOH','NaCl'], ans:0, topic:'s-Block Elements' },
+      { id:73, q:'The functional group -OH is called:', opts:['Carbonyl','Hydroxyl','Carboxyl','Amino'], ans:1, topic:'Organic Chemistry' },
+      { id:74, q:'Which is the lightest element?', opts:['Helium','Hydrogen','Lithium','Boron'], ans:1, topic:'Periodic Table' },
+      { id:75, q:'The process of conversion of solid to gas is:', opts:['Sublimation','Evaporation','Condensation','Fusion'], ans:0, topic:'States of Matter' },
+      { id:76, q:'The atomic number of sodium is:', opts:['10','11','12','13'], ans:1, topic:'Periodic Table' },
+      { id:77, q:'Which bond is present in NaCl?', opts:['Covalent','Ionic','Metallic','Hydrogen'], ans:1, topic:'Chemical Bonding' },
+      { id:78, q:'The catalyst used in Haber process is:', opts:['Fe','Ni','Pt','Cu'], ans:0, topic:'Industrial Chemistry' },
+      { id:79, q:'Ethanol is also known as:', opts:['Methyl alcohol','Ethyl alcohol','Propyl alcohol','Butyl alcohol'], ans:1, topic:'Organic Chemistry' },
+      { id:80, q:'The charge of an electron is:', opts:['+1.6×10⁻¹⁹ C','-1.6×10⁻¹⁹ C','0','-9.1×10⁻³¹ C'], ans:1, topic:'Atomic Structure' },
+      { id:81, q:'Plaster of Paris is:', opts:['CaSO₄·2H₂O','CaSO₄·½H₂O','CaSO₄','CaO'], ans:1, topic:'s-Block Elements' },
+      { id:82, q:'Which gas is most abundant in Earth\'s atmosphere?', opts:['Oxygen','Nitrogen','Carbon dioxide','Argon'], ans:1, topic:'Environmental Chemistry' },
+      { id:83, q:'The monomer of polythene is:', opts:['Propene','Ethene','Butene','Styrene'], ans:1, topic:'Polymers' },
+      { id:84, q:'Litmus turns red in:', opts:['Acidic solution','Basic solution','Neutral solution','All of these'], ans:0, topic:'Acids and Bases' },
+      { id:85, q:'The chemical formula of common salt is:', opts:['KCl','NaCl','CaCl₂','MgCl₂'], ans:1, topic:'s-Block Elements' },
+      { id:86, q:'The SI unit of amount of substance is:', opts:['Gram','Mole','Kilogram','Litre'], ans:1, topic:'Some Basic Concepts of Chemistry' },
+      { id:87, q:'Which of the following is a greenhouse gas?', opts:['O₂','N₂','CO₂','H₂'], ans:2, topic:'Environmental Chemistry' },
+      { id:88, q:'The valency of carbon is:', opts:['2','3','4','5'], ans:2, topic:'Organic Chemistry' },
+      { id:89, q:'The metal used in galvanisation is:', opts:['Iron','Zinc','Copper','Aluminium'], ans:1, topic:'Metallurgy' },
+      { id:90, q:'Bleaching powder is chemically:', opts:['CaOCl₂','Ca(OH)₂','CaCO₃','CaSO₄'], ans:0, topic:'s-Block Elements' },
+    ];
+
+    // BIOLOGY (Q91-Q180): Botany + Zoology
+    const biologyQuestions = [
+      { id:91, q:'Who discovered the cell?', opts:['Robert Hooke','Leeuwenhoek','Robert Brown','Schleiden'], ans:0, topic:'Cell - The Unit of Life' },
+      { id:92, q:'Which organelle is called the powerhouse of the cell?', opts:['Nucleus','Mitochondria','Ribosome','Golgi body'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:93, q:'Prokaryotic cells lack:', opts:['Cell wall','Nucleus membrane','Cytoplasm','Ribosomes'], ans:1, topic:'Prokaryotic Cell' },
+      { id:94, q:'Which of the following is a prokaryote?', opts:['Amoeba','Bacteria','Yeast','Paramecium'], ans:1, topic:'Prokaryotic Cell' },
+      { id:95, q:'The cell wall of plants is made of:', opts:['Chitin','Cellulose','Peptidoglycan','Keratin'], ans:1, topic:'Plant vs Animal Cell' },
+      { id:96, q:'Animal cells do NOT have:', opts:['Mitochondria','Cell wall','Nucleus','Ribosomes'], ans:1, topic:'Plant vs Animal Cell' },
+      { id:97, q:'The 5-kingdom classification was proposed by:', opts:['Linnaeus','R.H. Whittaker','Darwin','Haeckel'], ans:1, topic:'5 Kingdom Classification' },
+      { id:98, q:'Which kingdom includes bacteria?', opts:['Protista','Monera','Fungi','Plantae'], ans:1, topic:'5 Kingdom Classification' },
+      { id:99, q:'Yeast belongs to which kingdom?', opts:['Monera','Protista','Fungi','Plantae'], ans:2, topic:'5 Kingdom Classification' },
+      { id:100, q:'The basic unit of carbohydrate is:', opts:['Amino acid','Monosaccharide','Fatty acid','Nucleotide'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:101, q:'Proteins are polymers of:', opts:['Glucose','Amino acids','Nucleotides','Fatty acids'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:102, q:'DNA is a type of:', opts:['Carbohydrate','Protein','Nucleic acid','Lipid'], ans:2, topic:'Basic Chemical Idea of Cell' },
+      { id:103, q:'Which microscope uses electrons for imaging?', opts:['Light microscope','Electron microscope','Simple microscope','Dissecting microscope'], ans:1, topic:'Microscopy' },
+      { id:104, q:'The resolution of a light microscope is about:', opts:['0.2 nm','0.2 μm','2 mm','2 nm'], ans:1, topic:'Microscopy' },
+      { id:105, q:'Cell theory was formulated by:', opts:['Hooke and Leeuwenhoek','Schleiden and Schwann','Watson and Crick','Darwin and Wallace'], ans:1, topic:'Cell Theory' },
+      { id:106, q:'Which organelle is responsible for protein synthesis?', opts:['Lysosome','Ribosome','Centrosome','Peroxisome'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:107, q:'The fluid mosaic model describes the structure of:', opts:['Cell wall','Plasma membrane','Nucleus','Cytoplasm'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:108, q:'Amoeba belongs to kingdom:', opts:['Monera','Protista','Fungi','Animalia'], ans:1, topic:'5 Kingdom Classification' },
+      { id:109, q:'Mushroom is an example of kingdom:', opts:['Monera','Protista','Fungi','Plantae'], ans:2, topic:'5 Kingdom Classification' },
+      { id:110, q:'Which is NOT a characteristic of eukaryotic cells?', opts:['Membrane-bound nucleus','Mitochondria present','Circular DNA only','ER present'], ans:2, topic:'Eukaryotic Cell' },
+      { id:111, q:'Lipids are:', opts:['Hydrophilic','Hydrophobic','Amphoteric','Always solid'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:112, q:'Starch is a polymer of:', opts:['Fructose','Glucose','Sucrose','Lactose'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:113, q:'The cell organelle that contains digestive enzymes is:', opts:['Ribosome','Lysosome','Golgi body','ER'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:114, q:'Plant cells differ from animal cells by having:', opts:['Nucleus','Chloroplast','Mitochondria','Ribosomes'], ans:1, topic:'Plant vs Animal Cell' },
+      { id:115, q:'The kingdom Monera includes organisms that are:', opts:['Multicellular eukaryotes','Unicellular prokaryotes','Multicellular prokaryotes','Unicellular eukaryotes'], ans:1, topic:'5 Kingdom Classification' },
+      { id:116, q:'Which carbohydrate is found in cell walls of fungi?', opts:['Cellulose','Chitin','Peptidoglycan','Starch'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:117, q:'The organelle that modifies and packages proteins is:', opts:['Ribosome','Golgi apparatus','Lysosome','Nucleus'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:118, q:'Spirogyra belongs to kingdom:', opts:['Monera','Protista','Plantae','Fungi'], ans:2, topic:'5 Kingdom Classification' },
+      { id:119, q:'The eukaryotic ribosome is of type:', opts:['70S','80S','60S','50S'], ans:1, topic:'Eukaryotic Cell' },
+      { id:120, q:'Nucleotides are building blocks of:', opts:['Proteins','Nucleic acids','Lipids','Carbohydrates'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:121, q:'The first person to observe live cells under microscope was:', opts:['Robert Hooke','Leeuwenhoek','Robert Brown','Virchow'], ans:1, topic:'Microscopy' },
+      { id:122, q:'Which is present in both prokaryotic and eukaryotic cells?', opts:['Nucleus','Ribosomes','ER','Mitochondria'], ans:1, topic:'Prokaryotic vs Eukaryotic' },
+      { id:123, q:'The term "protoplasm" was coined by:', opts:['Purkinje','Dujardin','Hooke','Brown'], ans:0, topic:'Cell - The Unit of Life' },
+      { id:124, q:'Glycogen is a storage carbohydrate found in:', opts:['Plants','Animals','Bacteria','Fungi'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:125, q:'The largest organelle in a plant cell is usually:', opts:['Nucleus','Vacuole','Mitochondria','Chloroplast'], ans:1, topic:'Plant vs Animal Cell' },
+      { id:126, q:'Fungi are:', opts:['Autotrophic','Heterotrophic','Chemosynthetic','Photosynthetic'], ans:1, topic:'5 Kingdom Classification' },
+      { id:127, q:'The plasma membrane is composed mainly of:', opts:['Proteins only','Lipids only','Phospholipids and proteins','Carbohydrates only'], ans:2, topic:'Cell - The Unit of Life' },
+      { id:128, q:'Which nucleic acid carries genetic information?', opts:['RNA','DNA','ATP','NADH'], ans:1, topic:'Basic Chemical Idea of Cell' },
+      { id:129, q:'Peptidoglycan is found in the cell wall of:', opts:['Plants','Fungi','Bacteria','Animals'], ans:2, topic:'Prokaryotic Cell' },
+      { id:130, q:'The organelle that produces ATP is:', opts:['Nucleus','Mitochondria','Ribosome','Lysosome'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:131, q:'Kingdom Protista includes:', opts:['Bacteria only','Unicellular eukaryotes','Multicellular plants','Viruses'], ans:1, topic:'5 Kingdom Classification' },
+      { id:132, q:'Centrioles are found in:', opts:['Plant cells','Animal cells','Bacteria','Fungi'], ans:1, topic:'Plant vs Animal Cell' },
+      { id:133, q:'The cell theory states that:', opts:['All cells have nucleus','All living organisms are composed of cells','Cells arise spontaneously','Cells do not divide'], ans:1, topic:'Cell Theory' },
+      { id:134, q:'Which is a disaccharide?', opts:['Glucose','Fructose','Sucrose','Galactose'], ans:2, topic:'Basic Chemical Idea of Cell' },
+      { id:135, q:'The study of cells is called:', opts:['Histology','Cytology','Anatomy','Physiology'], ans:1, topic:'Cell - The Unit of Life' },
+      { id:136, q:'Which tissue covers the body surface and lines body cavities?', opts:['Connective tissue','Epithelial tissue','Muscular tissue','Nervous tissue'], ans:1, topic:'Epithelial Tissue' },
+      { id:137, q:'Simple squamous epithelium is found in:', opts:['Skin','Alveoli of lungs','Intestinal lining','Trachea'], ans:1, topic:'Epithelial Tissue' },
+      { id:138, q:'Goblet cells are present in which epithelium?', opts:['Simple squamous','Simple columnar','Stratified squamous','Transitional'], ans:1, topic:'Epithelial Tissue' },
+      { id:139, q:'Which cell junction prevents leakage between cells?', opts:['Gap junction','Tight junction','Desmosome','Hemidesmosome'], ans:1, topic:'Cell Junctions' },
+      { id:140, q:'Gap junctions are made of proteins called:', opts:['Cadherins','Connexins','Integrins','Claudins'], ans:1, topic:'Cell Junctions' },
+      { id:141, q:'Blood is a type of:', opts:['Epithelial tissue','Connective tissue','Muscular tissue','Nervous tissue'], ans:1, topic:'Connective Tissue' },
+      { id:142, q:'The matrix of blood is called:', opts:['Serum','Plasma','Lymph','Interstitial fluid'], ans:1, topic:'Connective Tissue' },
+      { id:143, q:'Which connective tissue stores fat?', opts:['Areolar tissue','Adipose tissue','Cartilage','Bone'], ans:1, topic:'Connective Tissue' },
+      { id:144, q:'Tendon connects:', opts:['Bone to bone','Muscle to bone','Muscle to muscle','Skin to muscle'], ans:1, topic:'Connective Tissue' },
+      { id:145, q:'Ligament connects:', opts:['Bone to bone','Muscle to bone','Muscle to muscle','Skin to muscle'], ans:0, topic:'Connective Tissue' },
+      { id:146, q:'The hardest tissue in the human body is:', opts:['Cartilage','Bone','Enamel','Dentin'], ans:2, topic:'Connective Tissue' },
+      { id:147, q:'Which muscle tissue is striated and voluntary?', opts:['Smooth muscle','Cardiac muscle','Skeletal muscle','All of these'], ans:2, topic:'Muscular Tissue' },
+      { id:148, q:'Cardiac muscle is found in:', opts:['Blood vessels','Heart','Intestine','Lungs'], ans:1, topic:'Muscular Tissue' },
+      { id:149, q:'Smooth muscle is:', opts:['Striated and voluntary','Non-striated and involuntary','Striated and involuntary','Non-striated and voluntary'], ans:1, topic:'Muscular Tissue' },
+      { id:150, q:'Intercalated discs are characteristic of:', opts:['Skeletal muscle','Smooth muscle','Cardiac muscle','Nervous tissue'], ans:2, topic:'Muscular Tissue' },
+      { id:151, q:'Pseudostratified epithelium is found in:', opts:['Skin','Trachea','Alveoli','Blood vessels'], ans:1, topic:'Epithelial Tissue' },
+      { id:152, q:'Transitional epithelium is present in:', opts:['Urinary bladder','Intestine','Lung','Heart'], ans:0, topic:'Epithelial Tissue' },
+      { id:153, q:'Desmosomes are also called:', opts:['Tight junctions','Adhering junctions','Gap junctions','Occluding junctions'], ans:1, topic:'Cell Junctions' },
+      { id:154, q:'Which tissue has the most abundant intercellular matrix?', opts:['Epithelial','Connective','Muscular','Nervous'], ans:1, topic:'Connective Tissue' },
+      { id:155, q:'Chondrocytes are found in:', opts:['Bone','Cartilage','Blood','Adipose tissue'], ans:1, topic:'Connective Tissue' },
+      { id:156, q:'Osteocytes are cells of:', opts:['Cartilage','Bone','Blood','Muscle'], ans:1, topic:'Connective Tissue' },
+      { id:157, q:'The functional unit of skeletal muscle is:', opts:['Sarcomere','Osteon','Nephron','Neuron'], ans:0, topic:'Muscular Tissue' },
+      { id:158, q:'Which muscle is multinucleated?', opts:['Smooth muscle','Cardiac muscle','Skeletal muscle','All of these'], ans:2, topic:'Muscular Tissue' },
+      { id:159, q:'Epithelial tissue is avascular, meaning it lacks:', opts:['Cells','Blood vessels','Nerves','Nucleus'], ans:1, topic:'Epithelial Tissue' },
+      { id:160, q:'The basement membrane is present between:', opts:['Epithelium and connective tissue','Muscle and bone','Two epithelial layers','Nerve and muscle'], ans:0, topic:'Epithelial Tissue' },
+      { id:161, q:'Which junction allows communication between adjacent cells?', opts:['Tight junction','Gap junction','Desmosome','Adherens junction'], ans:1, topic:'Cell Junctions' },
+      { id:162, q:'Mast cells are found in:', opts:['Blood','Areolar connective tissue','Bone','Cartilage'], ans:1, topic:'Connective Tissue' },
+      { id:163, q:'The matrix of cartilage is secreted by:', opts:['Osteocytes','Chondrocytes','Fibroblasts','Macrophages'], ans:1, topic:'Connective Tissue' },
+      { id:164, q:'Which tissue forms the framework of organs?', opts:['Epithelial','Connective','Muscular','Nervous'], ans:1, topic:'Connective Tissue' },
+      { id:165, q:'Ciliated epithelium is present in:', opts:['Fallopian tube','Alveoli','Blood vessels','Skin'], ans:0, topic:'Epithelial Tissue' },
+      { id:166, q:'The protein actin is found in:', opts:['Collagen fibers','Muscle fibers','Elastin','Keratin'], ans:1, topic:'Muscular Tissue' },
+      { id:167, q:'Which is NOT a type of connective tissue?', opts:['Blood','Bone','Cartilage','Epidermis'], ans:3, topic:'Connective Tissue' },
+      { id:168, q:'The epithelium that appears multilayered but is actually single-layered is:', opts:['Simple squamous','Pseudostratified','Stratified squamous','Transitional'], ans:1, topic:'Epithelial Tissue' },
+      { id:169, q:'Fibroblasts produce:', opts:['Bone matrix','Collagen and elastin','Keratin','Myosin'], ans:1, topic:'Connective Tissue' },
+      { id:170, q:'Which type of muscle shows rhythmic contraction?', opts:['Skeletal','Smooth','Cardiac','All'], ans:2, topic:'Muscular Tissue' },
+      { id:171, q:'Hemidesmosomes attach cells to:', opts:['Other cells','Basement membrane','Blood','Nerves'], ans:1, topic:'Cell Junctions' },
+      { id:172, q:'The most abundant protein in the animal body is:', opts:['Keratin','Collagen','Actin','Myosin'], ans:1, topic:'Connective Tissue' },
+      { id:173, q:'Microvilli are found on which epithelial surface?', opts:['Basal','Apical','Lateral','All'], ans:1, topic:'Epithelial Tissue' },
+      { id:174, q:'RBCs in mammals are:', opts:['Nucleated','Non-nucleated','Multinucleated','Binucleated'], ans:1, topic:'Connective Tissue' },
+      { id:175, q:'The dark band in skeletal muscle is called:', opts:['I-band','A-band','H-zone','Z-line'], ans:1, topic:'Muscular Tissue' },
+      { id:176, q:'Which epithelium is best suited for diffusion?', opts:['Simple squamous','Stratified squamous','Simple columnar','Transitional'], ans:0, topic:'Epithelial Tissue' },
+      { id:177, q:'Spindle-shaped muscle cells are characteristic of:', opts:['Skeletal muscle','Smooth muscle','Cardiac muscle','All muscles'], ans:1, topic:'Muscular Tissue' },
+      { id:178, q:'The ground substance of connective tissue is composed of:', opts:['Lipids only','Glycosaminoglycans and proteoglycans','Nucleic acids','Keratin'], ans:1, topic:'Connective Tissue' },
+      { id:179, q:'Which tissue has the least regenerative capacity?', opts:['Epithelial','Connective','Cardiac muscle','Bone'], ans:2, topic:'Muscular Tissue' },
+      { id:180, q:'The study of tissues is called:', opts:['Cytology','Histology','Anatomy','Embryology'], ans:1, topic:'Animal Tissues' },
+    ];
+
+    questionBank.push(...physicsQuestions, ...chemistryQuestions, ...biologyQuestions);
+
+    const TOTAL_QUESTIONS = 180;
+    const TOTAL_TIME_SEC = 3 * 3600; // 3 hours exactly
+    let currentQIndex = 0;
+    let userAnswers = new Array(TOTAL_QUESTIONS).fill(-1);
+    let markedForReview = new Array(TOTAL_QUESTIONS).fill(false);
+    let visitedQuestions = new Array(TOTAL_QUESTIONS).fill(false);
+    let timeRemaining = TOTAL_TIME_SEC;
+    let timerInterval = null;
+    let currentSection = 'physics';
+
+    function handleLogin() {
+      const id = document.getElementById('loginId').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+      const errorEl = document.getElementById('loginError');
+      if (id === 'Dr.Aditya Srivastava' && pass === '2028') {
+        errorEl.classList.remove('show');
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('testWrapper').classList.add('active');
+        document.getElementById('resultsPage').classList.remove('active');
+        initTest();
+      } else {
+        errorEl.classList.add('show');
+        setTimeout(() => errorEl.classList.remove('show'), 2500);
+      }
+    }
+
+    function initTest() {
+      currentQIndex = 0;
+      userAnswers.fill(-1);
+      markedForReview.fill(false);
+      visitedQuestions.fill(false);
+      timeRemaining = TOTAL_TIME_SEC;
+      currentSection = 'physics';
+      updateSectionTabs();
+      renderQuestion();
+      renderPalette();
+      updateTimerDisplay();
+      startTimer();
+      document.getElementById('sectionLabel').textContent = '📘 PHYSICS (Q1-Q45)';
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          alert('⏰ Time is up! Your test will be auto-submitted.');
+          submitTest();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const hrs = Math.floor(timeRemaining / 3600);
+      const mins = Math.floor((timeRemaining % 3600) / 60);
+      const secs = timeRemaining % 60;
+      const display = `${String(hrs).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+      const timerBox = document.getElementById('timerBox');
+      timerBox.textContent = display;
+      if (timeRemaining < 600) timerBox.classList.add('warning');
+      else timerBox.classList.remove('warning');
+    }
+
+    function getSectionForIndex(idx) {
+      if (idx < 45) return 'physics';
+      if (idx < 90) return 'chemistry';
+      return 'biology';
+    }
+
+    function switchSection(section) {
+      currentSection = section;
+      if (section === 'physics') currentQIndex = 0;
+      else if (section === 'chemistry') currentQIndex = 45;
+      else currentQIndex = 90;
+      document.getElementById('sectionLabel').textContent = (section==='physics'?'📘 PHYSICS (Q1-Q45)':(section==='chemistry'?'🧪 CHEMISTRY (Q46-Q90)':'🧬 BIOLOGY (Q91-Q180)'));
+      updateSectionTabs();
+      renderQuestion();
+      renderPalette();
+    }
+
+    function updateSectionTabs() {
+      const tabs = document.querySelectorAll('#sectionTabs .section-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      if (currentSection === 'physics') tabs[0].classList.add('active');
+      else if (currentSection === 'chemistry') tabs[1].classList.add('active');
+      else tabs[2].classList.add('active');
+    }
+
+    function renderQuestion() {
+      const qData = questionBank[currentQIndex];
+      visitedQuestions[currentQIndex] = true;
+      document.getElementById('qNumberDisplay').textContent = `Question ${qData.id} of 180`;  // no topic shown
+      document.getElementById('qTextDisplay').textContent = qData.q;
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+      const labels = ['(A)', '(B)', '(C)', '(D)'];
+      qData.opts.forEach((opt, i) => {
+        const li = document.createElement('li');
+        li.className = 'option-item';
+        if (userAnswers[currentQIndex] === i) li.classList.add('selected');
+        li.innerHTML = `<span class="option-radio"></span><span><strong>${labels[i]}</strong> ${opt}</span>`;
+        li.addEventListener('click', () => selectOption(i));
+        optionsList.appendChild(li);
+      });
+      const btnMark = document.getElementById('btnMark');
+      if (markedForReview[currentQIndex]) {
+        btnMark.classList.add('marked');
+        btnMark.textContent = '📌 Marked for Review';
+      } else {
+        btnMark.classList.remove('marked');
+        btnMark.textContent = '📌 Mark for Review';
+      }
+      const sec = getSectionForIndex(currentQIndex);
+      if (sec !== currentSection) {
+        currentSection = sec;
+        updateSectionTabs();
+      }
+      document.getElementById('sectionLabel').textContent = (currentSection==='physics'?'📘 PHYSICS (Q1-Q45)':(currentSection==='chemistry'?'🧪 CHEMISTRY (Q46-Q90)':'🧬 BIOLOGY (Q91-Q180)'));
+      renderPalette();
+      updatePaletteCounts();
+    }
+
+    function selectOption(optIndex) {
+      userAnswers[currentQIndex] = optIndex;
+      markedForReview[currentQIndex] = false;
+      renderQuestion();
+      updatePaletteCounts();
+    }
+
+    function clearResponse() {
+      userAnswers[currentQIndex] = -1;
+      markedForReview[currentQIndex] = false;
+      renderQuestion();
+      updatePaletteCounts();
+    }
+
+    function toggleMark() {
+      markedForReview[currentQIndex] = !markedForReview[currentQIndex];
+      renderQuestion();
+      updatePaletteCounts();
+    }
+
+    function saveAndNext() {
+      if (currentQIndex < TOTAL_QUESTIONS - 1) {
+        currentQIndex++;
+      } else {
+        currentQIndex = 0;
+        currentSection = 'physics';
+      }
+      const newSec = getSectionForIndex(currentQIndex);
+      if (newSec !== currentSection) {
+        currentSection = newSec;
+        updateSectionTabs();
+        document.getElementById('sectionLabel').textContent = (currentSection==='physics'?'📘 PHYSICS (Q1-Q45)':(currentSection==='chemistry'?'🧪 CHEMISTRY (Q46-Q90)':'🧬 BIOLOGY (Q91-Q180)'));
+      }
+      renderQuestion();
+    }
+
+    function goToQuestion(idx) {
+      currentQIndex = idx;
+      const newSec = getSectionForIndex(idx);
+      if (newSec !== currentSection) {
+        currentSection = newSec;
+        updateSectionTabs();
+        document.getElementById('sectionLabel').textContent = (currentSection==='physics'?'📘 PHYSICS (Q1-Q45)':(currentSection==='chemistry'?'🧪 CHEMISTRY (Q46-Q90)':'🧬 BIOLOGY (Q91-Q180)'));
+      }
+      renderQuestion();
+    }
+
+    function renderPalette() {
+      const grid = document.getElementById('paletteGrid');
+      grid.innerHTML = '';
+      for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'palette-btn';
+        btn.textContent = i + 1;
+        if (i === currentQIndex) btn.classList.add('current');
+        if (markedForReview[i]) btn.classList.add('marked-review');
+        else if (userAnswers[i] !== -1) btn.classList.add('answered');
+        else if (visitedQuestions[i]) btn.classList.add('not-answered');
+        btn.addEventListener('click', () => goToQuestion(i));
+        btn.title = `Q${i+1}: ${questionBank[i].topic}`;
+        grid.appendChild(btn);
+      }
+      updatePaletteCounts();
+    }
+
+    function updatePaletteCounts() {
+      let answered = 0, notAnswered = 0, marked = 0;
+      for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        if (markedForReview[i]) marked++;
+        else if (userAnswers[i] !== -1) answered++;
+        else notAnswered++;
+      }
+      document.getElementById('cntAnswered').textContent = answered;
+      document.getElementById('cntNotAnswered').textContent = notAnswered;
+      document.getElementById('cntMarked').textContent = marked;
+    }
+
+    function submitTest() {
+      if (!confirm('Are you sure you want to submit the test? You cannot change answers after submission.')) return;
+      if (timerInterval) clearInterval(timerInterval);
+      document.getElementById('testWrapper').classList.remove('active');
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('resultsPage').classList.add('active');
+      calculateResults();
+    }
+
+    function calculateResults() {
+      let totalObtained = 0, correctCount = 0;
+      let sectionScores = { physics: { correct:0, incorrect:0, total:0 }, chemistry: { correct:0, incorrect:0, total:0 }, biology: { correct:0, incorrect:0, total:0 } };
+      const topicErrors = {};
+      for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const qData = questionBank[i];
+        const userAns = userAnswers[i];
+        const sec = getSectionForIndex(i);
+        if (userAns === qData.ans) {
+          totalObtained += 4; correctCount++;
+          if (sec==='physics') sectionScores.physics.correct++;
+          else if (sec==='chemistry') sectionScores.chemistry.correct++;
+          else sectionScores.biology.correct++;
+        } else if (userAns !== -1) {
+          totalObtained -= 1;
+          if (sec==='physics') sectionScores.physics.incorrect++;
+          else if (sec==='chemistry') sectionScores.chemistry.incorrect++;
+          else sectionScores.biology.incorrect++;
+          topicErrors[qData.topic] = (topicErrors[qData.topic] || 0) + 1;
+        }
+        if (sec==='physics') sectionScores.physics.total++;
+        else if (sec==='chemistry') sectionScores.chemistry.total++;
+        else sectionScores.biology.total++;
+      }
+      const obtained = Math.max(0, totalObtained);
+      const percentage = Math.round((obtained / 720) * 10000) / 100;
+      let air;
+      if (obtained >= 700) air = Math.floor(Math.random()*50)+1;
+      else if (obtained >= 680) air = Math.floor(Math.random()*200)+50;
+      else if (obtained >= 650) air = Math.floor(Math.random()*500)+200;
+      else if (obtained >= 620) air = Math.floor(Math.random()*1500)+500;
+      else if (obtained >= 580) air = Math.floor(Math.random()*4000)+2000;
+      else if (obtained >= 540) air = Math.floor(Math.random()*8000)+5000;
+      else if (obtained >= 480) air = Math.floor(Math.random()*15000)+10000;
+      else if (obtained >= 400) air = Math.floor(Math.random()*30000)+20000;
+      else if (obtained >= 300) air = Math.floor(Math.random()*50000)+40000;
+      else air = Math.floor(Math.random()*100000)+80000;
+
+      document.getElementById('resPercent').textContent = percentage + '%';
+      document.getElementById('resObtained').textContent = obtained;
+      document.getElementById('resAIR').textContent = '~' + air.toLocaleString('en-IN');
+      document.getElementById('sectionScores').innerHTML = `
+        <span class="sec-phy">📘 Physics: ${sectionScores.physics.correct}/${sectionScores.physics.total} correct</span>
+        <span class="sec-chem">🧪 Chemistry: ${sectionScores.chemistry.correct}/${sectionScores.chemistry.total} correct</span>
+        <span class="sec-bio">🧬 Biology: ${sectionScores.biology.correct}/${sectionScores.biology.total} correct</span>
+      `;
+
+      let collegeText = '', motivationText = '', topicRepeatText = '';
+      if (air <= 100) collegeText = `<h3>🏆 AIR ~${air}</h3><p>AIIMS Delhi, JIPMER etc.</p>`;
+      else if (air <= 500) collegeText = `<h3>🌟 AIR ~${air}</h3><p>Top govt. colleges like MAMC, VMMC.</p>`;
+      else if (air <= 2000) collegeText = `<h3>👍 AIR ~${air}</h3><p>State govt. colleges possible.</p>`;
+      else if (air <= 8000) collegeText = `<h3>📚 AIR ~${air}</h3><p>New AIIMS/ESIC possible.</p>`;
+      else if (air <= 20000) {
+        collegeText = `<h3>⚠️ AIR ~${air}</h3><p>Govt. seat borderline. State quota may help.</p>`;
+        motivationText = `<h3>💪 Keep pushing!</h3><p>You are very close. Focused revision can add 50+ marks.</p>`;
+      } else {
+        collegeText = `<h3>😔 AIR ~${air}</h3><p>Govt. college difficult this time.</p>`;
+        motivationText = `<h3>🔥 This is NOT the end!</h3><p>Many toppers improved in second attempt. Your dream is worth fighting for.</p>`;
+      }
+
+      const sortedTopics = Object.entries(topicErrors).sort((a,b)=>b[1]-a[1]);
+      if (sortedTopics.length) {
+        topicRepeatText = '<h3>📖 Repeat these topics:</h3><ul>';
+        sortedTopics.slice(0,8).forEach(([t,c]) => topicRepeatText += `<li><strong>${t}</strong> – ${c} mistake(s)</li>`);
+        topicRepeatText += '</ul>';
+      } else {
+        topicRepeatText = '<h3>🎉 No mistakes!</h3><p>Keep revising to maintain this level.</p>';
+      }
+
+      document.getElementById('collegeResultBox').innerHTML = collegeText;
+      document.getElementById('motivationBox').innerHTML = motivationText;
+      document.getElementById('topicRepeatBox').innerHTML = topicRepeatText;
+    }
+
+    function restartTest() {
+      document.getElementById('resultsPage').classList.remove('active');
+      document.getElementById('testWrapper').classList.add('active');
+      document.getElementById('loginPage').style.display = 'none';
+      initTest();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('testWrapper').classList.contains('active')) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); saveAndNext(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (currentQIndex > 0) {
+          currentQIndex--;
+          const newSec = getSectionForIndex(currentQIndex);
+          if (newSec !== currentSection) { currentSection = newSec; updateSectionTabs(); }
+          renderQuestion();
+        }
+      }
+      else if (e.key === '1' || e.key === 'a') { e.preventDefault(); selectOption(0); }
+      else if (e.key === '2' || e.key === 'b') { e.preventDefault(); selectOption(1); }
+      else if (e.key === '3' || e.key === 'c') { e.preventDefault(); selectOption(2); }
+      else if (e.key === '4' || e.key === 'd') { e.preventDefault(); selectOption(3); }
+    });
+  </script>
+</body>
+</html>
